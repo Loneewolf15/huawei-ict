@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register — Huawei ICT Accountability</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">H</div>
+        <div class="logo-text">
+          <strong>Huawei ICT</strong>
+          <span>Accountability Partner</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="active">Register</a>
+        <a href="results.html">My Partner</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main">
+
+    <!-- Hero -->
+    <div class="page-hero">
+      <div class="eyebrow">Step 1 of 2</div>
+      <h1>Get Your <span>Accountability</span> Number</h1>
+      <p>Enter your name and track below. You'll receive a unique number — keep it safe. After everyone registers, the shuffle will pair you with a partner from your track.</p>
+    </div>
+
+    <!-- Track stats -->
+    <div class="card" style="margin-bottom:24px">
+      <div class="card-title">Live Registration Count</div>
+      <div class="stats-row">
+        <div class="stat-card">
+          <span class="stat-num" style="color:#60A5FA" id="count-Cloud">—</span>
+          <span class="stat-label">Cloud</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" style="color:#34D399" id="count-Network">—</span>
+          <span class="stat-label">Network</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" style="color:#FBBF24" id="count-Computing">—</span>
+          <span class="stat-label">Computing</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" style="color:#A78BFA" id="count-AI">—</span>
+          <span class="stat-label">AI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Registration card -->
+    <div class="card">
+      <div class="card-title">Registration Form</div>
+
+      <!-- Alert area -->
+      <div id="alert-box" class="alert alert-error" style="display:none"></div>
+
+      <!-- Form -->
+      <form id="register-form" novalidate>
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="e.g. Amira Okonkwo"
+            autocomplete="name"
+            maxlength="80"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="track">Your Track</label>
+          <select id="track" name="track" required>
+            <option value="" disabled selected>— Select your track —</option>
+            <option value="Cloud">☁️  Cloud</option>
+            <option value="Network">🌐  Network</option>
+            <option value="Computing">💻  Computing</option>
+            <option value="AI">🤖  AI</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submit-btn">
+          Get My Number
+        </button>
+      </form>
+
+      <!-- Result area (shown after successful registration) -->
+      <div id="result-box" style="display:none"></div>
+    </div>
+
+    <!-- How it works -->
+    <div class="card" style="margin-top:20px">
+      <div class="card-title">How It Works</div>
+      <ol style="color:var(--text-muted);font-size:14px;line-height:2;padding-left:20px">
+        <li>Register with your name and track → receive a number (1–25)</li>
+        <li>Your admin runs the shuffle after all participants register</li>
+        <li>Visit <strong style="color:var(--text)">My Partner</strong> and enter your number to see who you're paired with</li>
+        <li>Reach out to your partner and keep each other accountable! 🎯</li>
+      </ol>
+      <div class="alert alert-info" style="margin-top:16px;display:flex">
+        🔀 The shuffle uses <strong style="margin:0 4px">cryptographic randomness</strong> — it's provably fair and cannot be manipulated.
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <strong>Huawei ICT Academy</strong> · Accountability Partner System
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script type="module" src="js/register.js"></script>
+</body>
+</html>
+

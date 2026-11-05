@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Partner — Huawei ICT Accountability</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">H</div>
+        <div class="logo-text">
+          <strong>Huawei ICT</strong>
+          <span>Accountability Partner</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">Register</a>
+        <a href="results.html" class="active">My Partner</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main">
+
+    <!-- Hero -->
+    <div class="page-hero">
+      <div class="eyebrow">Step 2 of 2</div>
+      <h1>Find Your <span>Partner</span></h1>
+      <p>Enter the number you received when you registered, along with your track, to reveal your accountability partner.</p>
+    </div>
+
+    <!-- Shuffle status banner -->
+    <div id="status-banner" class="alert" style="display:none;margin-bottom:24px"></div>
+
+    <!-- Lookup card -->
+    <div class="card">
+      <div class="card-title">Partner Lookup</div>
+
+      <div id="alert-box" class="alert alert-error" style="display:none"></div>
+
+      <form id="lookup-form" novalidate>
+        <div class="form-group">
+          <label for="number-input">Your Assigned Number</label>
+          <input
+            type="number"
+            id="number-input"
+            placeholder="Enter your assigned number"
+            min="1"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="track-select">Your Track</label>
+          <select id="track-select" required>
+            <option value="" disabled selected>— Select your track —</option>
+            <option value="Cloud">☁️  Cloud</option>
+            <option value="Network">🌐  Network</option>
+            <option value="Computing">💻  Computing</option>
+            <option value="AI">🤖  AI</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="lookup-btn" disabled>
+          Find My Partner
+        </button>
+      </form>
+    </div>
+
+    <!-- Result area -->
+    <div id="result-box" style="display:none;margin-top:20px"></div>
+
+    <!-- Info card -->
+    <div class="card" style="margin-top:20px">
+      <div class="card-title">About This Pairing</div>
+      <p style="color:var(--text-muted);font-size:14px;line-height:1.8">
+        Partners are selected <strong style="color:var(--text)">randomly and fairly</strong> within your track using a cryptographic shuffle.
+        No one — including the admin — can influence who gets paired with whom. Once the shuffle runs, results are locked permanently.
+      </p>
+      <div class="alert alert-info" style="margin-top:16px;display:flex">
+        📌 If you're in an odd-numbered group, one trio will be formed — you'll still have at least one partner.
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <strong>Huawei ICT Academy</strong> · Accountability Partner System
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script type="module" src="js/results.js"></script>
+</body>
+</html>
+
