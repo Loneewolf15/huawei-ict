@@ -25,6 +25,8 @@ const statComputing = document.getElementById('stat-computing');
 const statAI        = document.getElementById('stat-ai');
 const statPaired    = document.getElementById('stat-paired');
 
+const downloadPdfBtn = document.getElementById('download-pdf-btn');
+
 const pairsSection  = document.getElementById('pairs-section');
 const pairsContainer = document.getElementById('pairs-container');
 const participantsContainer = document.getElementById('participants-container');
@@ -407,10 +409,104 @@ function showShuffleAlert(msg, type) {
 }
 
 // ============================================================
+//  Download PDF Report
+// ============================================================
+async function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  const { data: participants } = await supabase
+    .from('participants')
+    .select('*')
+    .order('track', { ascending: true })
+    .order('number', { ascending: true });
+
+  const all = participants || [];
+  const lookup = {};
+  all.forEach(p => { lookup[p.id] = p; });
+
+  const byTrack = {};
+  for (const p of all) {
+    if (!byTrack[p.track]) byTrack[p.track] = [];
+    byTrack[p.track].push(p);
+  }
+
+  // Header Title
+  doc.setFillColor(207, 10, 44); // Huawei Red
+  doc.rect(0, 0, 210, 24, 'F');
+
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(16);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Huawei ICT Academy - Accountability Pairs', 14, 15);
+
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+  doc.text(`Generated: ${new Date().toLocaleString()}`, 14, 21);
+
+  let currentY = 32;
+
+  for (const [track, members] of Object.entries(byTrack)) {
+    const tableData = [];
+    const seen = new Set();
+    let pairIndex = 1;
+
+    for (const p of members) {
+      if (seen.has(p.id)) continue;
+      const partner = p.partner_id ? lookup[p.partner_id] : null;
+      seen.add(p.id);
+      if (partner) seen.add(partner.id);
+
+      tableData.push([
+        `Pair ${pairIndex++}`,
+        `${p.name} (#${p.number})`,
+        partner ? `${partner.name} (#${partner.number})` : 'Awaiting Partner'
+      ]);
+    }
+
+    if (tableData.length === 0) continue;
+
+    // Check page overflow
+    if (currentY > 250) {
+      doc.addPage();
+      currentY = 20;
+    }
+
+    doc.setTextColor(26, 26, 26);
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.text(`${track.toUpperCase()} TRACK (${members.length} participants)`, 14, currentY);
+    currentY += 4;
+
+    doc.autoTable({
+      startY: currentY,
+      head: [['#', 'Student 1', 'Student 2 (Partner)']],
+      body: tableData,
+      theme: 'grid',
+      headStyles: {
+        fillColor: [207, 10, 44],
+        textColor: [255, 255, 255],
+        fontStyle: 'bold'
+      },
+      styles: {
+        fontSize: 10,
+        cellPadding: 4
+      },
+      margin: { left: 14, right: 14 }
+    });
+
+    currentY = doc.lastAutoTable.finalY + 12;
+  }
+
+  doc.save(`Huawei_ICT_Accountability_Pairs_${new Date().toISOString().slice(0,10)}.pdf`);
+}
+
+// ============================================================
 //  Event listeners
 // ============================================================
 shuffleBtn.addEventListener('click', runShuffle);
 resetBtn.addEventListener('click', runReset);
+if (downloadPdfBtn) downloadPdfBtn.addEventListener('click', generatePDF);
 
 // Real-time updates
 supabase
