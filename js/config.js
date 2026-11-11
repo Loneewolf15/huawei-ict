@@ -7,7 +7,7 @@ const SUPABASE_URL = 'https://qlshtjtgypmkfqfphuev.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFsc2h0anRneXBta2ZxZnBodWV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM4ODY2ODMsImV4cCI6MjEwOTQ2MjY4M30.4vxkyEdsrPXvSV0KxiKYXaK1EarmyEAJM3SbfqI6PEE';
 
 // Admin password for the shuffle trigger page
-const ADMIN_PASSWORD = 'huawei2025';
+const ADMIN_PASSWORD = 'lonewolf';
 
 // Available tracks
 const TRACKS = ['Cloud', 'Network', 'Computing', 'AI'];
